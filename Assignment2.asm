@@ -3,10 +3,13 @@
 	include macro.h
 	org $F000
 
-YPosFromBot = $80;
-VisiblePlayerLine = $81;
-YPosFromBot2 = $82;
-VisiblePlayerLine2 = $83;
+YPosFromBot = $80
+VisiblePlayerLine = $81
+YPosFromBot2 = $82
+VisiblePlayerLine2 = $83
+PlayerBuffer = $84
+PlayerBuffer2 = $85
+
 
 Start
 	CLEAN_START
@@ -51,7 +54,7 @@ SkipMoveUp
 	bit SWCHA
 	bne SkipMoveLeft
 	ldx #$10
-	lda #%00001000
+	lda #%00000000
 	sta REFP0
 SkipMoveLeft
 
@@ -59,7 +62,7 @@ SkipMoveLeft
 	bit SWCHA
 	bne SkipMoveRight
 	ldx #$F0
-	lda #%00000000
+	lda #%00001000
 	sta REFP0
 SkipMoveRight
 	stx HMP0
@@ -82,7 +85,7 @@ SkipMoveUp2
 	bit SWCHA
 	bne SkipMoveLeft2
 	ldx #$10
-	lda #%00001000
+	lda #%00000000
 	sta REFP1
 SkipMoveLeft2
 
@@ -90,7 +93,7 @@ SkipMoveLeft2
 	bit SWCHA
 	bne SkipMoveRight2
 	ldx #$F0
-	lda #%00000000
+	lda #%00001000
 	sta REFP1
 SkipMoveRight2
 	stx HMP1
@@ -100,9 +103,15 @@ SkipMoveRight2
 	bit CXPPMM
 	beq NoCollision
 	lda YPosFromBot
-	sta COLUBK
+	sta COLUP0
+	lda YPosFromBot2
+	sta COLUP1
 NoCollision
 	sta CXCLR
+	
+	lda #0
+	sta PlayerBuffer
+	sta PlayerBuffer2
 
 
 WaitForVblankEnd
@@ -116,6 +125,11 @@ WaitForVblankEnd
 
 ScanLoop
 	sta WSYNC
+	
+	lda PlayerBuffer
+	sta GRP0
+	lda PlayerBuffer2
+	sta GRP1
 
 CheckActivatePlayer
 	cpy YPosFromBot
@@ -133,25 +147,23 @@ SkipActivatePlayer2
 
 
 	lda #0
-	sta GRP0
-	
-	lda #0
-	sta GRP1
+	sta PlayerBuffer
+	sta PlayerBuffer2
 
 	
 	ldx VisiblePlayerLine
 	beq FinishPlayer
 IsPlayerOn
-	lda BigHeadGraphic-1,X
-	sta GRP0
+	lda Human-1,X
+	sta PlayerBuffer
 	dec VisiblePlayerLine
 FinishPlayer
 
 	ldx VisiblePlayerLine2
 	beq FinishPlayer2
 IsPlayerOn2
-	lda BigHeadGraphic-1,X
-	sta GRP1
+	lda Alien-1,X
+	sta PlayerBuffer2
 	dec VisiblePlayerLine2
 FinishPlayer2
 
@@ -170,15 +182,25 @@ OverScanWait
 	jmp  MainLoop
 
 
-BigHeadGraphic
-	.byte #%00111100
-	.byte #%01111110
-	.byte #%11000001
-	.byte #%10111111
-	.byte #%11111111
-	.byte #%11101011
-	.byte #%01111110
-	.byte #%00111100
+Alien
+	.byte #%11000110
+    .byte #%01000010
+    .byte #%01111110
+    .byte #%01010100
+    .byte #%00111001
+    .byte #%00100101
+    .byte #%01000010
+    .byte #%10000000
+
+Human
+	.byte #%01101100
+    .byte #%00100100
+    .byte #%10111101
+    .byte #%01111110
+    .byte #%10110111
+    .byte #%10010011
+    .byte #%01111110
+    .byte #%00111100
 
 	org $FFFC
 	.word Start
