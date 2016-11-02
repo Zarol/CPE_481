@@ -1,6 +1,10 @@
 # CPE_481
 Project files for the CPE 481 Embedded and Console Games Development course (Fall 2016).
-
++ [Instructions for ASM (Atari 2600)](#instructions-for-asm-atari-2600)
++ [Assignment1.asm](#assignment1asm)
++ [Assignment2.asm](#assignment2asm)
++ [Instructions for BAS (Commodore 64)](#instructions-for-bas-commodore-64)
++ [Assignment1.bas](#assignment1bas)
 ## Instructions for ASM (Atari 2600)
 Compile using DASM [(https://sourceforge.net/projects/dasm-dillon/)](https://sourceforge.net/projects/dasm-dillon/)
 ```
