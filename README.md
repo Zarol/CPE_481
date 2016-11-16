@@ -33,4 +33,4 @@ A small program to test the functionality of the C64 SID chip. The program synth
 
 ## C64Assignment2.bas
 This program highlights two of the major features of the SID chip: voices and filtering. The program will prompt you to to use either a low-pass, high-pass, or band-pass filter. It will then generate frequencies filtered by the selection for all 3 voices.
-![Assignment 2 Image](https://i.imgur.com/GYNmj52.png)
+![Assignment 2 Image](https://i.imgur.com/h9dQxGB.png)
