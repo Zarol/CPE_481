@@ -32,5 +32,5 @@ A small program to test the functionality of the C64 SID chip. The program synth
 ![Assignment 1 Image](http://i.imgur.com/L4cNKRl.png)
 
 ## C64Assignment2.bas
-These series of programs highlights one of the major features of the SID chip: filtering. -H, -L, -B, -N stand for high-pass, low-pass, bandpass, and notch reject filters respectively.
+This program highlights two of the major features of the SID chip: voices and filtering. The program will prompt you to to use either a low-pass, high-pass, or band-pass filter. It will then generate frequencies filtered by the selection for all 3 voices.
 ![Assignment 2 Image](https://i.imgur.com/GYNmj52.png)
